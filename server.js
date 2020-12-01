@@ -24,11 +24,11 @@ app.post('/tasks', (req, res) => {
 
 })
 
-app.get('/tasks/:uid', (req, res) => {
+app.get('/tasks/:uid(\\d+)', (req, res) => {
     global[req.params.uid - 1] ? res.json(global[req.params.uid - 1]) : res.send('Une erreur est survenue');
 })
 
-app.put('/tasks/:uid', (req, res) => {
+app.put('/tasks/:uid(\\d+)', (req, res) => {
     if(global[req.params.uid - 1] && req.body.name && req.body.date && req.body.finish){
         global[req.params.uid - 1] = req.body;
         res.json(global[req.params.uid - 1]);
@@ -37,7 +37,7 @@ app.put('/tasks/:uid', (req, res) => {
     }
 })
 
-app.delete('/tasks/:uid', (req, res) => {
+app.delete('/tasks/:uid(\\d+)', (req, res) => {
     if(global[req.params.uid - 1]){
         global.splice(req.params.uid - 1, 1);
         res.json(global);
